@@ -13,7 +13,8 @@ import javax.persistence.Column;
 @Getter
 public class ScheduleAirlineDto {
 
-	private Integer flightNumber;
+	private String flightId;
+	private String flightNumber;
 	private String airline;
 	private String fromPlace;
 	private String toPlace;

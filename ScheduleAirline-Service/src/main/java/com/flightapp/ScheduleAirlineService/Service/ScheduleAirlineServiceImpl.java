@@ -25,11 +25,13 @@ public class ScheduleAirlineServiceImpl implements ScheduleAirlineService {
 
 
 	@Override
-	public ScheduleAirlineResponseModel registerAirline(ScheduleAirlineDto ScheduleAirlineDto) {
+	public ScheduleAirlineResponseModel registerAirline(ScheduleAirlineDto scheduleAirlineDto) {
+
+		scheduleAirlineDto.setFlightId(UUID.randomUUID().toString());
 
 		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 		
-		ScheduleAirline airline = modelMapper.map(ScheduleAirlineDto, ScheduleAirline.class);
+		ScheduleAirline airline = modelMapper.map(scheduleAirlineDto, ScheduleAirline.class);
 		return modelMapper.map(airlineDao.save(airline), ScheduleAirlineResponseModel.class);
 	}
 

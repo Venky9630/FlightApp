@@ -11,7 +11,8 @@ import lombok.Setter;
 @Setter
 public class ScheduleAirlineResponseModel {
 
-	private Integer flightNumber;
+	private String flightId;
+	private String flightNumber;
 	private String airline;
 	private String fromPlace;
 	private String toPlace;

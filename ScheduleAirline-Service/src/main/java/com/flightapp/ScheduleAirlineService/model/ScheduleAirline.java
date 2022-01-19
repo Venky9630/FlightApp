@@ -11,7 +11,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Data
 @Entity
-@Table(name = "AIRLINE_TABLE")
+@Table(name = "FLIGHTS_TABLE")
 public class ScheduleAirline {
 	
 	@Id

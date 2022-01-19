@@ -24,8 +24,8 @@ public class ScheduleAirlineController {
 		this.modelMapper = modelmapper;
 	}
 
-	@PostMapping("/booking/{flightId}")
-	public ResponseEntity<ScheduleAirlineResponseModel> registerAirline(@PathVariable("flightId") String flightId, @RequestBody ScheduleAirlineRequestModel airlineRequestModel){
+	@PostMapping("/inventory/add")
+	public ResponseEntity<ScheduleAirlineResponseModel> registerAirline(@RequestBody ScheduleAirlineRequestModel airlineRequestModel){
 		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
 
 		ScheduleAirlineResponseModel airlineResponseModel = airlineService.registerAirline(modelMapper.map(airlineRequestModel, ScheduleAirlineDto.class));
