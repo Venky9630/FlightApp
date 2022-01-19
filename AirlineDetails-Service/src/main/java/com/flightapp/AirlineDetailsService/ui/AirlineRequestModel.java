@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Range;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotNull;
 
@@ -15,15 +16,15 @@ import javax.validation.constraints.NotNull;
 public class AirlineRequestModel {
 	
 	@NotNull
-	@Range(min = 5, max = 25, message = "airline name should not be greate than 25 characters")
+	@Range(min = 5, max = 25, message = "airline name should not be greater than 25 characters")
 	private String airlineName;
 	
 	@NotNull
-	private String airlineLogo;
+	private MultipartFile airlineLogo;
 	
 	@NotNull
-	@Range(max = 10, message = "Contact Number should not be greater than 10 digits")
-	private Integer airlineContactNumber;
+	@Range(max = 12, message = "Contact Number should not be greater than 10 digits")
+	private String airlineContactNumber;
 	
 	@NotNull
 	private String airlineAddress;

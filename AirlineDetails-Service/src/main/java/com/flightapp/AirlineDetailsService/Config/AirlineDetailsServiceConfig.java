@@ -1,9 +1,10 @@
 package com.flightapp.AirlineDetailsService.Config;
 
+import com.flightapp.AirlineDetailsService.dto.AirlineDto;
+import com.flightapp.AirlineDetailsService.model.Airline;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
 public class AirlineDetailsServiceConfig {
@@ -14,5 +15,12 @@ public class AirlineDetailsServiceConfig {
     {
         return new ModelMapper();
     }
+
+    @Bean
+    public AirlineDto airlineDto()
+    {
+        return new AirlineDto();
+    }
+
 
 }

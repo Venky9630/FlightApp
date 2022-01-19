@@ -20,4 +20,15 @@ public class AirlineControllerExceptionHandler {
 
         return ResponseEntity.status(errorResponseModel.getStatusCode()).body(errorResponseModel);
     }
+
+    @ExceptionHandler
+    public ResponseEntity<ErrorResponseModel> handleAirlineNotFoundException(FileStorageException e){
+        ErrorResponseModel errorResponseModel = new ErrorResponseModel();
+
+        errorResponseModel.setMessage(e.getMessage());
+        errorResponseModel.setStatusCode(HttpStatus.NOT_FOUND.value());
+        errorResponseModel.setErrorReportingTime(System.currentTimeMillis());
+
+        return ResponseEntity.status(errorResponseModel.getStatusCode()).body(errorResponseModel);
+    }
 }
