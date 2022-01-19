@@ -14,7 +14,7 @@ import javax.validation.constraints.NotNull;
 public class ScheduleAirlineRequestModel {
 
 	@NotNull
-	private Integer flightNumber;
+	private String flightNumber;
 	@NotNull
 	private String airline;
 	@NotNull
@@ -34,8 +34,8 @@ public class ScheduleAirlineRequestModel {
 	@NotNull
 	private String ticketCost;
 	@NotNull
-	private Integer rows;
+	private String rows;
 	@NotNull
-	private Integer mealType;
+	private String mealType;
 
 }

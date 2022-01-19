@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Column;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -24,7 +23,7 @@ public class ScheduleAirlineDto {
 	private String businessClassSeats;
 	private String nonBusinessClassSeats;
 	private String ticketCost;
-	private Integer rows;
-	private Integer mealType;
+	private String rows;
+	private String mealType;
 	
 }

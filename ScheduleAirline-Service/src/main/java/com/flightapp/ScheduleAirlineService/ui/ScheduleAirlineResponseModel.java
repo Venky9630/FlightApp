@@ -22,7 +22,7 @@ public class ScheduleAirlineResponseModel {
 	private String businessClassSeats;
 	private String nonBusinessClassSeats;
 	private String ticketCost;
-	private Integer rows;
-	private Integer mealType;
+	private String rows;
+	private String mealType;
 	
 }

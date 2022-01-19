@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1.0/flight/")
 public class ScheduleAirlineController {
@@ -17,7 +19,7 @@ public class ScheduleAirlineController {
 	private final ScheduleAirlineService airlineService;
 	private final ModelMapper modelMapper;
 	
-	
+
 	public ScheduleAirlineController(ScheduleAirlineService airlineService, ModelMapper modelmapper) {
 		super();
 		this.airlineService = airlineService;
@@ -30,6 +32,14 @@ public class ScheduleAirlineController {
 
 		ScheduleAirlineResponseModel airlineResponseModel = airlineService.registerAirline(modelMapper.map(airlineRequestModel, ScheduleAirlineDto.class));
 		return ResponseEntity.status(HttpStatus.CREATED).body(airlineResponseModel);
+	}
+
+	@GetMapping("/search")
+	public ResponseEntity<List<ScheduleAirlineResponseModel>> searchScheduledAirlines(@RequestParam(required = true) String airline,
+	@RequestParam(required = false) String flightNumber, @RequestParam(required = false) String instrumentUsed){
+
+		return ResponseEntity.ok(airlineService.findAllByAirlineOrFlightNumberOrInstrumentUsed(airline,flightNumber,instrumentUsed));
+
 	}
 
 }

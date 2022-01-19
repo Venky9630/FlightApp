@@ -17,23 +17,26 @@ public class ScheduleAirline {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
-	
+
+	@Column(name = "FLIGHT_ID", unique = true)
+	private String flightId;
+
 	@Column(name = "FLIGHT_NUMBER", unique = true)
-	private Integer flightNumber;
+	private String flightNumber;
 	
 	@Column(name = "AIRLINE")
 	private String airline;
 	
-	@Column(name = "FROM_PLACE")
+	@Column(name = "CURRENT_PLACE")
 	private String fromPlace;
 	
-	@Column(name = "TO_PLACE")
+	@Column(name = "DESTINATION")
 	private String toPlace;
 	
-	@Column(name = "START_DATETIME")
+	@Column(name = "STARTDATETIME")
 	private String startDateTime;
 
-	@Column(name = "END_DATETIME")
+	@Column(name = "ENDDATETIME")
 	private String endDateTime;
 
 	@Column(name = "INSTRUMENT_USED")
@@ -42,16 +45,16 @@ public class ScheduleAirline {
 	@Column(name = "BUSINESSCLASS_SEATS")
 	private String businessClassSeats;
 
-	@Column(name = "NON_BUSINESSCLASS_SEATS")
+	@Column(name = "NORMAL_SEATS")
 	private String nonBusinessClassSeats;
 
 	@Column(name = "TICKET_COST")
 	private String ticketCost;
 
-	@Column(name = "ROWS")
-	private Integer rows;
+	@Column(name = "FLIGHTROWS")
+	private String rows;
 
 	@Column(name = "MEAL_TYPE")
-	private Integer mealType;
+	private String mealType;
 
 }

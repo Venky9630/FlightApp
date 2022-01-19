@@ -8,6 +8,9 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -16,7 +19,7 @@ public class ScheduleAirlineServiceImpl implements ScheduleAirlineService {
 	private final ScheduleAirlineDao airlineDao;
 	private final ModelMapper modelMapper;
 
-	
+
 	public ScheduleAirlineServiceImpl(ScheduleAirlineDao ScheduleAirlineDao, ModelMapper modelMapper) {
 		super();
 		this.airlineDao = ScheduleAirlineDao;
@@ -33,6 +36,17 @@ public class ScheduleAirlineServiceImpl implements ScheduleAirlineService {
 		
 		ScheduleAirline airline = modelMapper.map(scheduleAirlineDto, ScheduleAirline.class);
 		return modelMapper.map(airlineDao.save(airline), ScheduleAirlineResponseModel.class);
+	}
+
+	@Override
+	public List<ScheduleAirlineResponseModel> findAllByAirlineOrFlightNumberOrInstrumentUsed(String airline, String flightNumber, String instrumentUsed) {
+		List<ScheduleAirlineResponseModel> createSearchAirlineResponseModels=new ArrayList<>();
+		Iterable<ScheduleAirline> iterable= airlineDao.findAllByAirlineOrFlightNumberOrInstrumentUsed(airline, flightNumber, instrumentUsed);
+		Iterator<ScheduleAirline> iterator=iterable.iterator();
+		while(iterator.hasNext()) {
+			createSearchAirlineResponseModels.add(modelMapper.map(iterator.next(),ScheduleAirlineResponseModel.class));
+		}
+		return createSearchAirlineResponseModels;
 	}
 
 }
