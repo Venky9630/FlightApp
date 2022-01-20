@@ -8,17 +8,20 @@ import com.flightapp.BookingFlightService.ui.BookingFlightResponseModel;
 import com.flightapp.BookingFlightService.ui.TicketsResponseModel;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
+import org.springframework.beans.BeanUtils;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class BookingFlightServiceImpl implements BookingFlightService {
 
 	private final BookingFlightDao bookingFlightDao;
 	private final ModelMapper modelMapper;
-	private RestTemplate restTemplate;
+	private final RestTemplate restTemplate;
 
 
 	public BookingFlightServiceImpl(BookingFlightDao bookingFlightDao, ModelMapper modelMapper, RestTemplate restTemplate) {
@@ -46,16 +49,13 @@ public class BookingFlightServiceImpl implements BookingFlightService {
 	@Override
 	public TicketsResponseModel getBookedTickets(String pnr) {
 		BookingFlight bookedTickets = bookingFlightDao.findByPnr(pnr);
-			FlightDetails flightDetails = restTemplate.getForObject("http://schedule-airline-service/api/v1.0/flight/search?flightId=" + bookedTickets.getFlightId(), FlightDetails.class);
+
+			ResponseEntity <FlightDetails[]> response = restTemplate.getForEntity("http://schedule-airline-service/api/v1.0/flight/search?flightId=" + bookedTickets.getFlightId(), FlightDetails[].class);
+			FlightDetails[] flightDetails = response.getBody();
 			TicketsResponseModel ticketsResponseModel = new TicketsResponseModel();
-			ticketsResponseModel.setFlightDetails(flightDetails);
-			ticketsResponseModel.setAge(bookedTickets.getAge());
-			ticketsResponseModel.setEmailId(bookedTickets.getEmailId());
-			ticketsResponseModel.setGender(bookedTickets.getGender());
-			ticketsResponseModel.setMealPreference(bookedTickets.getMealPreference());
-			ticketsResponseModel.setPassengerName(bookedTickets.getPassengerName());
-			ticketsResponseModel.setSeatNumber(bookedTickets.getSeatNumber());
-			ticketsResponseModel.setPnr(bookedTickets.getPnr());
+			BeanUtils.copyProperties(bookedTickets, ticketsResponseModel);
+			ticketsResponseModel.setFlightDetails(Arrays.asList(flightDetails));
+
 			return ticketsResponseModel;
 	}
 

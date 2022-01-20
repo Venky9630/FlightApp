@@ -8,6 +8,7 @@ import lombok.*;
 @Setter
 public class FlightDetails {
 
+    private String id;
     private String flightId;
     private String flightNumber;
     private String airline;

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@RequestMapping("/api/v1.0/flight/")
+@RequestMapping("/api/v1.0/flightBookingService/")
 public class BookingFlightController {
 	
 	private final BookingFlightService bookingFlightService;
