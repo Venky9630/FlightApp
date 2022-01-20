@@ -35,11 +35,11 @@ public class ScheduleAirlineController {
 	}
 
 	@GetMapping("/search")
-	public ResponseEntity<List<ScheduleAirlineResponseModel>> searchScheduledAirlines(@RequestParam(required = true) String airline,
+	public ResponseEntity<List<ScheduleAirlineResponseModel>> searchScheduledAirlines(@RequestParam(required = false) String airline,
 	@RequestParam(required = false) String flightNumber, @RequestParam(required = false) String instrumentUsed,
     @RequestParam(required = false) String startDateTime, @RequestParam(required = false) String endDateTime,
 	@RequestParam(required = false) String from, @RequestParam(required = false) String to, @RequestParam(required = false) String trip,
-  	@RequestParam(required = false) String flightId){
+  	@RequestParam(value = "flightId", required = false) String flightId){
 
 		return ResponseEntity.ok(airlineService.findAllByAirlineOrFlightNumberOrInstrumentUsed(airline,flightNumber,instrumentUsed,flightId));
 
